@@ -666,6 +666,10 @@ h1, h2, h3, p { margin-top: 0; }
 .contact-fields .form-input { margin-bottom: 0; }
 .privacy-note { display: flex; align-items: center; margin: 16px 0 0; color: #77737b; font-size: 9px; gap: 8px; }
 .privacy-note svg { flex: 0 0 auto; color: var(--color-gold); }
+.inquiry-honeypot { display: none !important; }
+.submitted-brief { width: min(100%, 560px); margin-top: 20px; color: #a19ea5; text-align: left; }
+.submitted-brief summary { color: var(--color-gold-light); cursor: pointer; font-size: 11px; }
+.submitted-brief pre { overflow: auto; max-height: 240px; padding: 14px; color: #c7c2ca; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: rgba(255,255,255,.025); font: inherit; font-size: 10px; white-space: pre-wrap; }
 .inquiry-success { display: flex; min-height: 440px; flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; border: 1px solid rgba(139,183,156,.22); border-radius: 13px; background: radial-gradient(ellipse at 50% 15%,rgba(62,107,76,.1),transparent 65%),rgba(16,18,19,.9); text-align: center; }
 .success-icon { display: grid; width: 52px; height: 52px; place-items: center; color: var(--color-green); border: 1px solid rgba(139,183,156,.28); border-radius: 50%; background: rgba(139,183,156,.08); }
 .inquiry-success .form-step-kicker { margin: 18px 0 8px; color: var(--color-green); }
