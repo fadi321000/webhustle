@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 body { margin: 0; min-width: 320px; min-height: 100vh; color: var(--color-text); background: var(--color-bg); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-body::before { position: fixed; inset: 0; z-index: -1; pointer-events: none; content: ""; background: radial-gradient(ellipse 44% 66% at 5% 23%, rgba(72, 42, 103, .16), transparent 70%), radial-gradient(ellipse 47% 63% at 99% 42%, rgba(25, 45, 91, .17), transparent 71%), linear-gradient(180deg, rgba(255,255,255,.012), transparent 42%); }
+body::before { position: fixed; inset: 0; z-index: -1; pointer-events: none; content: ""; background: radial-gradient(ellipse 44% 66% at 5% 23%, rgba(72, 42, 103, .16), transparent 70%), radial-gradient(ellipse 47% 63% at 99% 42%, rgba(25, 45, 91, .17), transparent 71%), radial-gradient(ellipse 40% 55% at 56% 100%, rgba(201,169,107,.055), transparent 74%), linear-gradient(180deg, rgba(255,255,255,.012), transparent 42%); background-size: 110% 110%, 110% 110%, 110% 110%, 100% 100%; background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; animation: ambient-glow-drift 40s ease-in-out infinite alternate; }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--color-gold-light); outline-offset: 4px; border-radius: 4px; }
@@ -857,6 +857,10 @@ body::after { z-index: -1; }
 @keyframes ambient-speckle-drift {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, -8px, 0); }
+}
+@keyframes ambient-glow-drift {
+  from { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
+  to { background-position: 5% 8%, 95% 8%, 55% 92%, 0 0; }
 }
 .button {
   position: relative;
