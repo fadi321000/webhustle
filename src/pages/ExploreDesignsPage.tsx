@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Check, Expand, Maximize2, Monitor,
 import { Link } from 'react-router-dom'
 import { DesignSitePreview } from '../components/DesignSitePreview'
 import { SectionEyebrow } from '../components/SectionEyebrow'
-import { designCategories, designProjects, type DesignCategory } from '../data/designs'
+import { designCategories, designProjects, type DesignFilter } from '../data/designs'
 
 type ViewportMode = 'desktop' | 'tablet' | 'mobile'
 
@@ -14,7 +14,7 @@ const viewportOptions: { mode: ViewportMode; label: string; size: string; icon: 
 ]
 
 export function ExploreDesignsPage() {
-  const [activeCategory, setActiveCategory] = useState<'All' | DesignCategory>('All')
+  const [activeCategory, setActiveCategory] = useState<DesignFilter>('All Designs')
   const [search, setSearch] = useState('')
   const [selectedSlug, setSelectedSlug] = useState(designProjects[0]?.slug ?? '')
   const [viewport, setViewport] = useState<ViewportMode>('desktop')
@@ -25,8 +25,8 @@ export function ExploreDesignsPage() {
   const filteredProjects = useMemo(() => {
     const query = search.trim().toLowerCase()
     return designProjects.filter((project) => {
-      const matchesCategory = activeCategory === 'All' || project.category === activeCategory
-      const matchesQuery = !query || [project.name, project.description, project.category].some((value) => value.toLowerCase().includes(query))
+      const matchesCategory = activeCategory === 'All Designs' || project.category === activeCategory || project.filters?.includes(activeCategory) === true
+      const matchesQuery = !query || [project.name, project.description, project.category, project.food?.cuisine, project.food?.keywords].some((value) => value?.toLowerCase().includes(query))
       return matchesCategory && matchesQuery
     })
   }, [activeCategory, search])
@@ -69,11 +69,11 @@ export function ExploreDesignsPage() {
         <div className="library-topline"><div><span className="library-count">{designProjects.length.toString().padStart(2, '0')}</span><span>curated directions</span></div><span>Thoughtfully made. Ready to make your own.</span></div>
         <div className="explore-toolbar">
           <label className="design-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search designs by name, description or category</span><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search designs, styles, ideas..." /></label>
-          <button className="clear-search" type="button" onClick={() => { setSearch(''); setActiveCategory('All') }}>Reset <X size={12} /></button>
+          <button className="clear-search" type="button" onClick={() => { setSearch(''); setActiveCategory('All Designs') }}>Reset <X size={12} /></button>
         </div>
         <div className="category-filter" role="group" aria-label="Filter designs by category">
           {designCategories.map((category) => {
-            const count = category === 'All' ? designProjects.length : designProjects.filter((project) => project.category === category).length
+            const count = category === 'All Designs' ? designProjects.length : designProjects.filter((project) => project.category === category || project.filters?.includes(category)).length
             return <button key={category} type="button" className={`category-chip${activeCategory === category ? ' is-active' : ''}`} aria-pressed={activeCategory === category} onClick={() => setActiveCategory(category)}>{category}<span>{count}</span></button>
           })}
         </div>
@@ -104,7 +104,7 @@ export function ExploreDesignsPage() {
         {filteredProjects.length ? <div className="design-grid">{filteredProjects.map((project) => <article className="design-card" key={project.slug}>
           <button className="design-card-image" type="button" onClick={() => selectPreview(project)} aria-label={`Preview ${project.name} design`}><DesignSitePreview project={project} compact /><span className="image-overlay"><span>View in preview <ArrowUpRight size={14} /></span></span></button>
           <div className="design-card-content"><div className="design-card-meta"><span className="design-category">{project.category}</span>{project.status && <span className="demo-badge"><i /><Check size={10} /> {project.status}</span>}</div><h3>{project.name}</h3><p>{project.description}</p><div className="design-card-actions"><Link className="button button-quiet" to={`/designs/${project.slug}`}>Preview <ArrowUpRight size={14} /></Link><Link className="similar-link" to={`/request?reference=${project.slug}&category=${encodeURIComponent(project.category)}`}>Request Similar <ArrowRight size={14} /></Link></div></div>
-        </article>)}</div> : <div className="empty-designs"><div className="empty-search-icon"><Search size={19} /></div><h3>No designs found</h3><p>Try another search or choose a different category to find your inspiration.</p><button className="button button-quiet" type="button" onClick={() => { setSearch(''); setActiveCategory('All') }}>Clear search and filters <X size={14} /></button></div>}
+        </article>)}</div> : <div className="empty-designs"><div className="empty-search-icon"><Search size={19} /></div><h3>No designs found</h3><p>Try another search or choose a different category to find your inspiration.</p><button className="button button-quiet" type="button" onClick={() => { setSearch(''); setActiveCategory('All Designs') }}>Clear search and filters <X size={14} /></button></div>}
       </section>
       <section className="explore-cta"><div className="container explore-cta-inner"><div><SectionEyebrow>Your idea, your direction</SectionEyebrow><h2>Found a feeling?<br /><span>Let’s make it yours.</span></h2></div><Link className="button button-gold" to="/request">Start your project <ArrowUpRight size={15} /></Link></div></section>
     </div>
