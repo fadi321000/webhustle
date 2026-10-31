@@ -12,7 +12,7 @@ export function RequestWebsitePage() {
   const [quote, setQuote] = useState<QuoteSelection>({ packageId: 'growth', maintenance: false, assetIds: [] })
   const projectReference = getDesignProject(searchParams.get('reference') ?? undefined)
   const category = searchParams.get('category') ?? projectReference?.category
-  const categoryToWebsiteType: Record<string, string> = { Restaurants: 'Restaurant', 'E-commerce': 'E-commerce', Business: 'Business', Portfolios: 'Portfolio', SaaS: 'SaaS', 'Real Estate': 'Real Estate', Education: 'Education', 'Personal Brands': 'Portfolio' }
+  const categoryToWebsiteType: Record<string, string> = { Restaurants: 'Restaurant', 'Cafés': 'Restaurant', 'Fast Food': 'Restaurant', 'Indian Cuisine': 'Restaurant', 'Arabian & Mandi': 'Restaurant', 'Bakeries & Desserts': 'Restaurant', 'Fine Dining': 'Restaurant', 'E-commerce': 'E-commerce', Business: 'Business', Portfolios: 'Portfolio', SaaS: 'SaaS', 'Real Estate': 'Real Estate', Education: 'Education', 'Personal Brands': 'Portfolio' }
   const initialWebsiteType = category ? categoryToWebsiteType[category] : undefined
   const total = useMemo(() => {
     const basePrice = pricingPackages.find((item) => item.id === quote.packageId)?.price ?? pricingPackages[1].price

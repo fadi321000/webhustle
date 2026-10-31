@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Menu, Search, Sparkles } from 'lucide-react'
 import type { DesignProject } from '../data/designs'
+import { FoodDesignPreview } from './FoodDesignPreview'
 
 export function DesignSitePreview({ project, compact = false }: { project: DesignProject; compact?: boolean }) {
   return (
@@ -12,6 +13,7 @@ export function DesignSitePreview({ project, compact = false }: { project: Desig
       {project.variant === 'monroe' && <MonroePreview project={project} />}
       {project.variant === 'morrow' && <MorrowPreview project={project} />}
       {project.variant === 'avery' && <AveryPreview project={project} />}
+      {project.variant === 'food' && <FoodDesignPreview project={project} compact={compact} />}
     </div>
   )
 }

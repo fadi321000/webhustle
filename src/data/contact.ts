@@ -1,8 +1,9 @@
 const env = import.meta.env
 
 export const contactDetails = {
-  whatsappNumber: (env.VITE_WHATSAPP_NUMBER ?? '').replace(/\D/g, ''),
-  instagramUrl: env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/direct/inbox/',
+  whatsappNumber: '918848904211',
+  phoneNumber: '+918848904211',
+  instagramUrl: 'https://www.instagram.com/webhustle.app/',
   email: env.VITE_CONTACT_EMAIL || 'webhustle.in@gmail.com',
 }
 
